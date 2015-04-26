@@ -5,8 +5,8 @@ Make sure `mongodb`, `node` will be installed in your computer
 
 ###Steps To Play###
 
-  * Clone source code server at [GitHub](git@github.com:cuong88pham/captureit.git)
-  * Clone source code Chrome Extenstion at [GitHub](git@github.com:cuong88pham/webcliper.git)
+  * Clone source code server at git@github.com:cuong88pham/captureit.git
+  * Clone source code Chrome Extenstion at git@github.com:cuong88pham/webcliper.git
   * Install Chrome Extenstion
   * Start mongodb: mongod&
   * Start Client: cd source_code_path/client && grunt serve
