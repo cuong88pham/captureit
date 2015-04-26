@@ -10,6 +10,10 @@
         <div class="box">
           <p>{{feed.description}}</p>
           <p><a href="#/feeds/{{feed._id}}" title="{{feed.title}}" target="_blank">{{feed.title}}</a></p>
+          <p class="clearfix">
+            <span class="pull-left"><span class="glyphicon glyphicon-share"></span> {{feed.user_ids.length || 0}}</span>
+            <span class="pull-right">{{feed.like_count || 0}}<span class="glyphicon glyphicon-heart"></span></span>
+          </p>
         </div>
       </div>
 

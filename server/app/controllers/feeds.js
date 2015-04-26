@@ -7,6 +7,7 @@ var express = require('express'),
   Feed = mongoose.model('Feed'),
   _url  = require('url'),
   auth = require('../../config/validateRequest'),
+  async = require('async'),
   cheerio = require("cheerio");
 
 var feeds = {
@@ -24,12 +25,15 @@ var feeds = {
   create: function(req, res){
     auth.authencation(req, res, function(current_user){
       Feed.create(req.body, function(err, feed){
-        if(!err){
-          current_user.feed_ids.push(feed._id);
-          current_user.save(function(err){
-            console.log(current_user);
-            console.log(err);
+        if(err && err.code == 11000){
+          Feed.findOne({title: req.body.title}, function(err, data){
+            if(err) return res.json(401, {error: err});
+            has_many_feeds_users(data, current_user);
+            return res.json(200, data);
           });
+        }
+        if(!err){
+          has_many_feeds_users(feed, current_user);
           return res.json(200, feed);
         }
       });
@@ -44,3 +48,27 @@ module.exports = function (app) {
 router.get('/api/v1/feeds', feeds.find_all);
 router.get('/api/v1/feeds/:id', feeds.find);
 router.post('/api/v1/feeds', feeds.create);
+
+function has_many_feeds_users(feed, current_user){
+  async.parallel([
+    function(callback){
+      if(feed.user_ids.indexOf(current_user._id) == -1){
+        feed.user_ids.push(current_user._id);
+        feed.save(function(err){
+          callback(err);
+        });
+      };
+    },
+    function(callback){
+      if(current_user.feed_ids.indexOf(feed._id) == -1){
+        current_user.feed_ids.push(feed._id);
+        current_user.save(function(err){
+          callback(err);
+        });
+      };
+    }
+  ], function(err, results){
+
+  });
+
+}

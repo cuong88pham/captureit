@@ -1,6 +1,7 @@
-myApp.controller('FeedCtrl', function ($scope, $sce, $routeParams, FeedFactory){
-
+myApp.controller('FeedCtrl', function ($scope, $sce, $window, $routeParams, FeedFactory){
+  $scope.disable_heart = '';
   $scope.feed = {};
+  $scope.user_id = $window.localStorage.user;
   FeedFactory.find_by_id($routeParams.id)
   .success(function(feed){
     $scope.feed = feed;
@@ -9,6 +10,39 @@ myApp.controller('FeedCtrl', function ($scope, $sce, $routeParams, FeedFactory){
   .error(function(err){
 
   });
+
+  $scope.like = function(feed_id){
+    var user = $window.localStorage.user;
+    if(user){
+      FeedFactory.like(feed_id).success(function(data){
+        console.log(data);
+      })
+      .error(function(err){
+
+      });
+    }else{
+      alert('Please login to like it!');
+      return false;
+    }
+  }
+
+  $scope.unlike = function(feed_id){
+    var user = $window.localStorage.user;
+
+    if(user){
+      FeedFactory.unlike(feed_id).success(function(data){
+        console.log(data);
+        $scope.disable_heart = 'disable_heart';
+      })
+      .error(function(err){
+
+      });
+    }else{
+      alert('Please login to like it!');
+      return false;
+    }
+  }
+
   $scope.iframeOnLoad = function(){
     var iframe = document.getElementById('iframe');
     if(iframe){

@@ -11,6 +11,7 @@ var FeedSchema = new Schema({
   hashtag: Array,
   user_like_ids: Array,
   like_count: {type: Number, default: 0},
+  user_ids: {type: Array, default: []},
   created_at: { type: Date, default: Date.now }
 });
 

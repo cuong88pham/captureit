@@ -57,6 +57,6 @@ function setAuth(AuthFactory, user, $window){
   AuthFactory.isLogin = true;
   AuthFactory.user = user;
   $window.localStorage.token = user.auth_token;
-  $window.localStorage.user = user;
+  $window.localStorage.user = user._id;
   $window.location.reload();
 }

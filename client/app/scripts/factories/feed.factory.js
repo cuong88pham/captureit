@@ -10,6 +10,13 @@ myApp.factory('FeedFactory', function($window, $http){
     },
     my_feeds: function(){
       return $http.get(base_url_api+'users/me/feeds')
-    }
+    },
+    like: function(feed_id){
+      return $http.put(base_url_api+'users/me/like', {feed_id: feed_id})
+    },
+    unlike: function(feed_id){
+      return $http.put(base_url_api+'users/me/unlike', {feed_id: feed_id})
+    },
+
   }
 });

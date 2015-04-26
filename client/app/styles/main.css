@@ -24,9 +24,14 @@ h1, h2, h3{
   position: relative;
   margin-top: 0px;
 }
-.glyphicon, .title{
+.disable-heart:hover, .glyphicon, .title{
   color: #18B898;
+  cursor: pointer;
 }
+.disable-heart{
+  color: #ccc;
+}
+
 p{margin-bottom: 5px;}
 @media (min-width: 768px){
   footer .navbar-nav{
