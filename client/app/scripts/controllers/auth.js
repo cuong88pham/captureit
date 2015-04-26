@@ -1,4 +1,4 @@
-myApp.controller('AuthCtrl', function ($scope, $sce, $location, $window, $routeParams, AuthFactory, UserFactory){
+myApp.controller('AuthCtrl', ['$scope', '$location', '$window', '$routeParams', 'AuthFactory', 'UserFactory', function ($scope, $sce, $location, $window, $routeParams, AuthFactory, UserFactory){
   /* User sign in
     Request (application/json)
     {
@@ -32,19 +32,17 @@ myApp.controller('AuthCtrl', function ($scope, $sce, $location, $window, $routeP
     UserFactory.sign_up($scope.user)
     .success(function(user){
       setAuth(AuthFactory, user, $window);
-      // $location.path("/");
     })
     .error(function(err){
       console.log(err);
     });
   }
-})
-.controller('SignOutCtrl', function ($scope, $sce, $location, $window, $routeParams, AuthFactory, UserFactory){
+}])
+.controller('SignOutCtrl', ['$scope', 'UserFactory', function ($scope, UserFactory){
   UserFactory.sign_out();
-})
-.controller('profileCtrl', ['$scope', '$window', 'AuthFactory', 'UserFactory', function($scope, $window, AuthFactory, UserFactory){
+}])
+.controller('profileCtrl', ['$scope', 'UserFactory', function($scope, UserFactory){
   UserFactory.me().success(function(user){
-    console.log(user);
     $scope.user = user;
   })
   .error(function(err){

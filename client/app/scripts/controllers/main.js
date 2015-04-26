@@ -1,6 +1,6 @@
 'use strict';
 
-myApp.controller('MainCtrl', function ($scope, $window, FeedFactory, AuthFactory){
+myApp.controller('MainCtrl', ['$scope', '$window', 'FeedFactory', 'AuthFactory', function ($scope, $window, FeedFactory, AuthFactory){
 
   $scope.feeds = {};
   $scope.isLogin = AuthFactory.isLogin;
@@ -9,6 +9,6 @@ myApp.controller('MainCtrl', function ($scope, $window, FeedFactory, AuthFactory
     $scope.feeds = feeds;
   })
   .error(function(err){
-
+    console.log(err);
   });
-});
+}]);

@@ -1,5 +1,4 @@
-myApp.controller('FeedCtrl', function ($scope, $sce, $window, $routeParams, FeedFactory){
-  $scope.disable_heart = '';
+myApp.controller('FeedCtrl', ['$scope', '$sce','$window', '$routeParams', 'FeedFactory', function($scope, $sce, $window, $routeParams, FeedFactory){
   $scope.feed = {};
   $scope.user_id = $window.localStorage.user;
   FeedFactory.find_by_id($routeParams.id)
@@ -50,13 +49,12 @@ myApp.controller('FeedCtrl', function ($scope, $sce, $window, $routeParams, Feed
       iframe.height = "500px";
     }
   }
-}).controller('myFeedCtrl', function($scope, FeedFactory, UserFactory){
+}]).controller('myFeedCtrl', ['$scope', 'FeedFactory', 'UserFactory', function($scope, FeedFactory, UserFactory){
   $scope.feeds = {};
   FeedFactory.my_feeds().success(function(feeds){
     $scope.feeds = feeds;
   })
   .error(function(err){
     console.log(err);
-    // UserFactory.sign_out();
   })
-});
+}]);
