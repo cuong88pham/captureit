@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var FeedSchema = new Schema({
-  title: String,
+  title: {type: String, index: {unique: true, required : true, dropDups: true}},
   url: String,
   content: String,
   description: String,

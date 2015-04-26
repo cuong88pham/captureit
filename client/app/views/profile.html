@@ -1,0 +1,20 @@
+<div>
+  <h1 class="text-center">My Profile</h1>
+  <div class="col-md-4">
+    <h4>My Profile</h4>
+    <p>Fullname: <span class="text-right"><b>{{user.username}}</b></span> <a href="#"><span class="glyphicon glyphicon-edit"></span><a/></p>
+    <p>Email:  <span class="text-right"><b>{{user.email}}</b></span> <a href="#"><span class="glyphicon glyphicon-edit"></span><a/></p>
+    <p><a href="#/changepassword">Change password</a></p>
+  </div>
+  <div class="col-md-4">
+    <h4>Notification</h4>
+    <p>You have <b>{{user.friend_ids.length}}</b> friends</p>
+    <p>You have <b>{{user.requested_friends_ids.length}}</b> request friends</p>
+    <p>You have <b>{{user.follower_ids.length}}</b> followers</p>
+    <p>You are  <b>{{user.following_ids.length}}</b> followings</p>
+    <p>You have <b>{{user.feed_ids.length}}</b> feeds</p>
+  </div>
+  <!-- <div class="col-md-4">
+    <h4>Notification</h4>
+  </div> -->
+</div>

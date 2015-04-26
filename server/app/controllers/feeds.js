@@ -6,11 +6,12 @@ var express = require('express'),
   User = mongoose.model('User'),
   Feed = mongoose.model('Feed'),
   _url  = require('url'),
+  auth = require('../../config/validateRequest'),
   cheerio = require("cheerio");
 
 var feeds = {
   find_all: function(req, res){
-    Feed.find({}, function(err, feeds){
+    Feed.find({},{}, {sort: {created_at: -1}}, function(err, feeds){
       return res.json(200, feeds);
     });
   },
@@ -21,20 +22,16 @@ var feeds = {
     })
   },
   create: function(req, res){
-    var url = req.body.url;
-    var request = require("request");
-    request({
-      uri: url,
-    }, function(error, response, body) {
-      $ = cheerio.load(body);
-      var params = {
-        title: $('title').text(),
-        description: $('meta[name="description"]').attr('content'),
-        url: url,
-        domain: _url.parse(url).hostname
-      }
-      Feed.create(params, function(err, feed){
-        return res.json(200, feed);
+    auth.authencation(req, res, function(current_user){
+      Feed.create(req.body, function(err, feed){
+        if(!err){
+          current_user.feed_ids.push(feed._id);
+          current_user.save(function(err){
+            console.log(current_user);
+            console.log(err);
+          });
+          return res.json(200, feed);
+        }
       });
     });
   }

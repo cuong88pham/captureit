@@ -72,7 +72,9 @@ var users = {
   },
   get_feeds: function(req, res){
     auth.authencation(req, res, function(current_user){
-      return res.json(200, getFeeds(current_user));
+      getFeeds(current_user, function(feeds){
+        return res.json(200, feeds);
+      });
     });
   },
   like: function(req, res){
@@ -162,12 +164,12 @@ function followed(current_user, user_followed_id){
 }
 
 // GET Feeds via user
-function getFeeds(current_user){
+function getFeeds(current_user, cb){
   var feed_ids = current_user.feed_ids;
   if(feed_ids.length < 1) return [];
-  Feed.find({_id: {$in: feed_ids}}, function(err, feeds){
+  Feed.find({_id: {$in: feed_ids}},{}, {sort: {created_at: -1}}, function(err, feeds){
     if(err) return [];
-    return feeds;
+    return cb(feeds);
   });
 }
 

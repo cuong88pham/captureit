@@ -27,7 +27,8 @@ var user = {
   sign_in: function(req, res){
     // Validate Email & Password
     var email = req.body.email || '',
-        password = req.body.password || '';
+        password = req.body.password || '',
+        changeToken = req.body.change_token || false;
 
     if(email == '' || password == ''){
       return res.json(401, {error: 'Email or password is required.'});
@@ -46,14 +47,17 @@ var user = {
         if(!isMatch){
           return res.json(401, {error: 'Your password is incorrect.'});
         }
-        token = genToken(user).token;
-        user.auth_token = token;
-        console.log(token);
-        user.save(function(err){
-          if(err) return res.json(401, {error: err});
-          return res.json(200, user);
-        })
-
+        // Change Token when login first time or request change token
+        console.log(user.auth_token, changeToken);
+        if(!user.auth_token || changeToken == true){
+          token = genToken(user).token;
+          user.auth_token = token;
+          user.save(function(err){
+            if(err) return res.json(401, {error: err});
+            return res.json(200, user);
+          });
+        }
+        return res.json(200, user);
       });
     });
   },

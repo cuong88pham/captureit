@@ -7,6 +7,9 @@ myApp.factory('FeedFactory', function($window, $http){
     },
     find_by_id: function(feed_id){
       return $http.get(base_url_api+'feeds/'+feed_id);
+    },
+    my_feeds: function(){
+      return $http.get(base_url_api+'users/me/feeds')
     }
   }
 });

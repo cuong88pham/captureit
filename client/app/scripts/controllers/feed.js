@@ -16,4 +16,13 @@ myApp.controller('FeedCtrl', function ($scope, $sce, $routeParams, FeedFactory){
       iframe.height = "500px";
     }
   }
+}).controller('myFeedCtrl', function($scope, FeedFactory, UserFactory){
+  $scope.feeds = {};
+  FeedFactory.my_feeds().success(function(feeds){
+    $scope.feeds = feeds;
+  })
+  .error(function(err){
+    console.log(err);
+    // UserFactory.sign_out();
+  })
 });

@@ -25,28 +25,7 @@
 
     <!-- Add your site or application content here -->
     <!--BEGIN HEADER-->
-    <div class="row">
-      <div class="container">
-        <div class="col-md-12">
-          <nav class="navbar">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <h3><a class="navbar-brand" href="#">
-                  <img alt="Brand" src="/images/logo.png">
-                  CAPTUREIT
-                </a></h3>
-              </div>
-            </div>
-
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">How It Works</a></li>
-              <li><a href="#">Sign In</a></li>
-
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
+    <div ng-include src="'views/header.html'"></div>
     <!--END HEADER-->
     <!--BEGIN CONTENT-->
     <div class="row">
@@ -63,21 +42,9 @@
       <div class="container" >
         <div class="col-md-12">
           <footer class="text-center">
-            <nav class="navbar">
-
-            <ul class="nav navbar-nav">
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Changelog</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms & Conditions</a></li>
-              <li><a href="#">Sign In</a></li>
-            </ul>
-          </nav>
+          <br/>
           <p>
-            Capture.it is a product from <a href="http://ncct.vn" target="_blank">NCCT.VN</a>
-          </p>
-          <p>
-            Make with <span class="glyphicon glyphicon-heart"></span> from <a href="http://ncct.vn" target="_blank">NCCT.VN</a>
+            Make with <span class="glyphicon glyphicon-heart"></span> from <a href="#" target="_blank">CuongPM</a>
           </p>
           </footer>
         </div>
@@ -128,8 +95,11 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/factories/feed.factory.js"></script>
+        <script src="scripts/factories/auth.factory.js"></script>
+        <script src="scripts/factories/user.factory.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/feed.js"></script>
+        <script src="scripts/controllers/auth.js"></script>
         <!-- endbuild -->
 </body>
 </html>

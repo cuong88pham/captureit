@@ -1,5 +1,9 @@
 <div>
   <h1 class="text-center">COOL ARTICLES CONTENT</h1>
+  <div class="alert alert-warning" ng-show="feeds.length == 0">
+    You have no feeds
+  </div>
+
   <div masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".item"}'>
     <div ng-repeat="feed in feeds">
       <div class="item">

@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="container">
+    <div class="col-md-12">
+      <nav class="navbar">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <h3><a class="navbar-brand" href="#">
+              <img alt="Brand" src="/images/logo.png">
+              CAPTUREIT
+            </a></h3>
+          </div>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+          <!-- <li><a href="#">How It Works</a></li> -->
+          <li ng-show="isLogin"><a href="#/my_feeds">My Feeds</a></li>
+          <li ng-show="isLogin"><a href="#/me">My Profile</a></li>
+          <li ng-show="isLogin"><a href="#/auth/sign_out">Signout</a></li>
+          <li ng-show="!isLogin"><a href="#/auth/sign_in">Sign In</a></li>
+          <li ng-show="!isLogin"><a href="#/auth/sign_up">Sign Up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
