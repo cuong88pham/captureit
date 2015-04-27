@@ -8,6 +8,8 @@ var express = require('express'),
   _url  = require('url'),
   auth = require('../../config/validateRequest'),
   async = require('async'),
+  request = require('request'),
+  fs      = require('fs'),
   cheerio = require("cheerio");
 
 var feeds = {
@@ -34,6 +36,7 @@ var feeds = {
         }
         if(!err){
           has_many_feeds_users(feed, current_user);
+          save_page(req.body.url, feed._id+'.html', request);
           return res.json(200, feed);
         }
       });
@@ -48,6 +51,19 @@ module.exports = function (app) {
 router.get('/api/v1/feeds', feeds.find_all);
 router.get('/api/v1/feeds/:id', feeds.find);
 router.post('/api/v1/feeds', feeds.create);
+
+function save_page(url, filename, request){
+  request(url, function(err, res, body){
+    if(!err){
+      console.log(config.root+"/public/files");
+      fs.writeFile('public/files/'+filename, body, function(err){
+        if(err){
+          console.log(err);
+        }
+      })
+    }
+  })
+}
 
 function has_many_feeds_users(feed, current_user){
   async.parallel([

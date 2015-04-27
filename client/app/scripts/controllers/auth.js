@@ -1,4 +1,4 @@
-myApp.controller('AuthCtrl', ['$scope', '$location', '$window', '$routeParams', 'AuthFactory', 'UserFactory', function ($scope, $sce, $location, $window, $routeParams, AuthFactory, UserFactory){
+myApp.controller('AuthCtrl', ['$scope','$location', '$window', '$routeParams', 'AuthFactory', 'UserFactory', function ($scope, $location, $window, $routeParams, AuthFactory, UserFactory){
   /* User sign in
     Request (application/json)
     {

@@ -4,7 +4,7 @@ myApp.controller('FeedCtrl', ['$scope', '$sce','$window', '$routeParams', 'FeedF
   FeedFactory.find_by_id($routeParams.id)
   .success(function(feed){
     $scope.feed = feed;
-    $scope.url = $sce.trustAsResourceUrl(feed.url);
+    $scope.url = $sce.trustAsResourceUrl('http://localhost:3000/files/'+$routeParams.id+'.html');
   })
   .error(function(err){
 

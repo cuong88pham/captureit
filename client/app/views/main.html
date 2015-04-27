@@ -8,6 +8,7 @@
     <div ng-repeat="feed in feeds">
       <div class="item">
         <div class="box">
+          <p><img src="{{feed.image}}" class="img-responsive" alt="{{feed.title}}" /></p>
           <p>{{feed.description}}</p>
           <p><a href="#/feeds/{{feed._id}}" title="{{feed.title}}" target="_blank">{{feed.title}}</a></p>
           <p class="clearfix">
